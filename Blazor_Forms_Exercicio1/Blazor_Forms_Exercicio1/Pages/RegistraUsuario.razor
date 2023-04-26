@@ -1,0 +1,85 @@
+﻿@page "/registrausuario"
+
+<h3>Registra Novo Usuario</h3>
+
+@if(ultimoSubmit != null)
+{
+    <h2>Status do último submit: @ultimoSubmit</h2>
+}
+
+<EditForm Model="@user" OnValidSubmit="@OnValidSubmitLogin" OnInvalidSubmit="@OnInvalidSubmitLogin">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="firstName">Nome</label>
+            <InputText type="text" class="form-control" placeholder="Nome" @bind-Value="user.Nome"/>
+            <ValidationMessage For="@(()=>user.Nome)"/>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="lastName">Sobrenome</label>
+            <InputText type="text" class="form-control" placeholder="Sobrenome" @bind-Value="user.Sobrenome" />
+            <ValidationMessage For="@(()=>user.Sobrenome)"/>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="login">Login</label>
+            <InputText type="text" class="form-control" placeholder="Login" @bind-Value="user.Login" />
+            <ValidationMessage For="@(()=>user.Login)" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="age">Idade</label>
+            <InputNumber class="form-control" @bind-Value="user.Idade" />
+            <ValidationMessage For="@(()=>user.Idade)" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="email">Email</label>
+            <InputText type="email" class="form-control" placeholder="seunome@email.com" @bind-Value="user.Email" />
+            <ValidationMessage For="@(()=>user.Email)" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="perfil">Perfil</label>
+            <InputSelect id="perfil" class="form-control" @bind-Value="user.Perfil">
+                <option value="">Selecione o perfil</option>
+                <option value="Admin">Administrador</option>
+                <option value="User">Usuário</option>
+            </InputSelect>
+            <ValidationMessage For="@(()=>user.Perfil)" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="password">Password</label>
+            <InputText type="password" class="form-control" @bind-Value="user.Password" />
+            <ValidationMessage For="@(()=>user.Password)" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="repassword">Confirma Password</label>
+            <InputText type="password" class="form-control" @bind-Value="user.ConfirmaPassword" />
+            <ValidationMessage For="@(()=>user.ConfirmaPassword)" />
+        </div>
+
+    </div>
+
+    <hr />
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </div>
+    </div>
+</EditForm>
+
+@code {
+    public Usuario user = new Usuario();
+    string ultimoSubmit;
+
+    public void OnValidSubmitLogin(EditContext editContext)
+    {
+        ultimoSubmit = $"OnValidSubmit foi executado" +
+        $"O formulário é válido = {editContext.Validate()}";
+    }
+
+    public void OnInvalidSubmitLogin(EditContext editContext)
+    {
+        ultimoSubmit = $"OnValidSubmit foi executado" +
+        $"O formulário é válido = {editContext.Validate()}";
+    }
+
+}

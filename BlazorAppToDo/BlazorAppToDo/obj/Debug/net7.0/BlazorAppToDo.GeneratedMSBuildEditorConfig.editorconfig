@@ -1,0 +1,53 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = BlazorAppToDo
+build_property.RootNamespace = BlazorAppToDo
+build_property.ProjectDir = C:\Dev\Blazor\BlazorAppToDo\BlazorAppToDo\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Dev\Blazor\BlazorAppToDo\BlazorAppToDo
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/Shared/_Alert.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXF9BbGVydC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/Shared/_Confirm.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXF9Db25maXJtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/Shared/_ToDo.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXF9Ub0RvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/Shared/_ToDoItem.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXF9Ub0RvSXRlbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-xyvhoptyji
+
+[C:/Dev/Blazor/BlazorAppToDo/BlazorAppToDo/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-807qbc7dxb

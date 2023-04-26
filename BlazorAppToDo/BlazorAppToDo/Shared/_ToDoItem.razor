@@ -1,0 +1,12 @@
+﻿
+<td><button onclick="@(() => DeleteToDo.InvokeAsync(item))"><i class="oi oi-trash"></i></button></td>
+<td>@item.DateCreated</td>
+<td>@item.Description</td>
+<td><input type="checkbox" @bind="item.Done" />@item.Done</td>
+
+@code {
+
+    [Parameter] public ToDo item { get; set; }
+    //passagem de um evento como parametro
+    [Parameter] public EventCallback<ToDo> DeleteToDo { get; set; }
+}

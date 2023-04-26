@@ -1,0 +1,100 @@
+﻿
+<h1>@title</h1>
+
+@if (todos == null)
+{
+    <p>Carregando...</p>
+}
+else if (!todos.Any())
+{
+    <_Alert Mensagem="Ainda não existe tarefas" />
+    @*<p>Ainda não existe tarefas</p>*@
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ação</th>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Concluída</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in todos)
+            {
+                <tr>                    
+                    <_ToDoItem item="item" DeleteToDo="RemoveToDo"/>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <_Confirm @ref="Confirm" onCancel="CancelConfirm" onConfirm="DeleteToDoConfirm">
+        <div>Deseja excluir esta tarefa?</div>
+    </_Confirm>
+    
+}
+
+
+
+@if (todos != null)
+{
+    <div class="form-control">
+        <label>Tarefas</label>
+        <input type="text" placeholder="Informe a tarefa" @bind="newToDo" />
+        <button class="btn btn-primary" @onclick="AddNewToDo">Registrar Tarefa</button>
+    </div>
+}
+
+@code {
+
+    [Parameter] public List<ToDo> todos { get; set; }
+    [Parameter] public string title { get; set; }
+
+
+    private string newToDo = "";
+    private _Confirm Confirm;
+    private ToDo DeleteToDo;
+
+    private void AddNewToDo()
+    {
+        if (!string.IsNullOrWhiteSpace(newToDo))
+        {
+            todos.Add(new ToDo
+                {
+                    DateCreated = DateTime.Now,
+                    Description = newToDo,
+                    Id = Guid.NewGuid()
+                });
+
+            newToDo = "";
+        }
+    }
+
+    private void RemoveToDo(ToDo todo)
+    {
+        Confirm.ShowModal();
+        DeleteToDo = todo;
+        /*
+        var t = todos.FirstOrDefault(x => x.Id == todo.Id);
+
+        if (t != null)
+            todos.Remove(t);*/
+    }
+
+    private void DeleteToDoConfirm()
+    {
+        todos.Remove(DeleteToDo);
+        DeleteToDo = null;
+        Confirm.CloseModal();
+    }
+
+    private void CancelConfirm()
+    {
+        Confirm.CloseModal();
+        DeleteToDo = null;
+    }
+}

@@ -1,0 +1,18 @@
+﻿@page "/"
+@inject HttpClient http
+
+<_ToDo title="Tarefas" todos="GetToDo()" />
+
+@code{
+    List<ToDo> todos = new List<ToDo>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        todos = await http.GetFromJsonAsync<List<ToDo>>("data/todo.json");
+    }
+
+    private List<ToDo> GetToDo()
+    {
+        return todos;
+    }
+}
