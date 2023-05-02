@@ -1,0 +1,90 @@
+﻿@page "/catalogo"
+@page "/catalogo/{CategoriaId:int}"
+@inject HttpClient httpClient
+
+<h3>Catálogo de Produtos</h3>
+<br/>
+<div class="form-group">
+    <label for="categoria">Categoria</label>
+    <select @onchange="CategoriaSelectionChange" class="form-control">
+        @if(categorias != null)
+        {            
+            @foreach (var item in categorias)
+            {
+                <option value="@item.CategoriaId" selected="@(item.CategoriaId == CategoriaId ? true:false)">
+                    @item.Nome
+                </option>
+            }
+        }
+    </select>
+</div>
+<br/>
+
+@if (produtos == null)
+{
+    <p>Carregando...</p>
+}
+else if (produtos.Count == 0)
+{
+    <p><em>Não existem categorias cadastradas!</em></p>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in produtos)
+        {        
+            <div class="col-sm-3 col-lg-3 col-md-3">
+                <div class="card" style="border: none;">
+                    <img src="@item.ImagemUrl" class="card-rounded" alt="@item.Nome" width="180" height="180">
+                    <div class="card-body">
+                        <h4 class="card-title">@item.Nome</h4>
+                        <h2 class="card-title">@string.Format("{0:C2}",item.Preco)</h2>
+                        <p class="card-text">@item.Descricao</p>
+                        <a href="produto/detalhe/@item.ProdutoId" class="btn btn-primary">Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int CategoriaId { get; set; }
+    List<Categoria>? categorias { get; set; }
+    List<Produto>? produtos { get; set; }
+    private int _categoriaId;
+    private string teste;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        categorias = await httpClient.GetFromJsonAsync<List<Categoria>>("api/categoria/all");
+        if(CategoriaId == 0)
+        {
+            this._categoriaId = categorias[0].CategoriaId;
+        }
+        else
+        {
+            this._categoriaId = CategoriaId;
+        }
+        await CarregarProdutos();
+    }
+
+    private async Task CarregarProdutos()
+    {
+        produtos = await httpClient.GetFromJsonAsync<List<Produto>>($"api/produto/categorias/{this._categoriaId}");
+        StateHasChanged();
+        //teste = "Fabio";
+    }
+
+    async void CategoriaSelectionChange(ChangeEventArgs e)
+    {        
+        if(int.TryParse(e.Value.ToString(), out int id))
+        {
+            this._categoriaId = id;
+            await CarregarProdutos();
+        }
+        
+    }
+}

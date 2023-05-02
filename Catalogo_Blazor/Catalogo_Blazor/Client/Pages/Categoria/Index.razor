@@ -1,0 +1,140 @@
+﻿@page "/categoria"
+@using System.Text.Json;
+@inject HttpClient httpClient
+
+<h3>Categoria</h3>
+
+<div>
+    <a class="btn btn-success" href="categoria/create">Criar categoria</a>
+</div>
+<br/>
+<div class="row align-items-center">
+    <div class="col">
+        <label class="sr-only" for="filter-name">Filtro</label>
+        <input type="text" class="form-control mb-2 mr-sm-2"
+            placeholder="Filtrar pelo nome"
+            @bind="nomeFiltro"/>
+
+    </div>
+    <div class="col">
+        <button type="button" class="btn btn-primary" @onclick="Filtrar">Filtrar</button>
+        <button type="button" class="btn btn-danger" @onclick="LimparFiltro">Limpar</button>
+    </div>
+</div>
+
+@if(categorias == null)
+{
+    <p>Carregando...</p>
+}else if(categorias.Count == 0)
+{
+    <p><em>Não existem categorias cadastradas!</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in categorias)
+            {                
+                <tr>
+                    <td>@item.Nome</td>
+                    <td>@item.Descricao</td>
+                    <td><a class="btn btn-primary" href="categoria/edit/@item.CategoriaId">Editar</a></td>
+                    <td><a class="btn btn-danger" @onclick="@(()=> DeletarCategoria(item.CategoriaId))">Excluir</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<Confirma 
+    @ref="confirma" 
+    onCancel="@CancelaConfirma"
+    onConfirm="@DeletaCategoria">
+    <div>Deseja realmente excluir este item?</div>      
+</Confirma>
+<hr/>
+
+<Paginacao QuantidadeTotalPaginas="QuantidadeTotalPaginas"
+    paginaAtual="paginaAtual" Raio="2" PaginaSelecionada="PaginaSelecionada">
+
+</Paginacao>
+
+@code {
+
+    List<Categoria>?categorias { get; set; }
+    Confirma confirma;
+    int _categoriaId;
+
+    private int QuantidadeTotalPaginas;
+    private int paginaAtual = 1;
+    private string nomeFiltro = string.Empty;
+
+    private async Task Filtrar()
+    {
+        paginaAtual = 1;
+        await CarregaCategorias();
+    }
+
+    private async Task PaginaSelecionada(int pagina)
+    {
+        paginaAtual = pagina;
+        await CarregaCategorias(pagina);
+    }
+
+    private async Task LimparFiltro()
+    {
+        nomeFiltro = string.Empty;
+        paginaAtual = 1;
+        await CarregaCategorias();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregaCategorias();
+    }
+
+    async Task CarregaCategorias(int pagina=1, int quantidadePorPagina=2)
+    {
+        var httpResponse = await httpClient.GetAsync($"api/categoria?pagina={pagina}&quantidadePorPagina={quantidadePorPagina}&nomeFiltro={nomeFiltro}");
+
+        if (httpResponse.IsSuccessStatusCode)
+        {
+            QuantidadeTotalPaginas = int.Parse(httpResponse.Headers.GetValues("totalPaginas").FirstOrDefault());
+            var responseString = await httpResponse.Content.ReadAsStringAsync();
+            categorias = JsonSerializer.Deserialize<List<Categoria>>(responseString,
+                new JsonSerializerOptions()
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+        }
+
+        //categorias = await httpClient.GetFromJsonAsync<Categoria[]>("api/categoria");
+    }
+
+    void DeletarCategoria(int categoriaId)
+    {
+        confirma.ShowModal();
+        _categoriaId = categoriaId;
+
+    }
+
+    async Task DeletaCategoria()
+    {
+        await httpClient.DeleteAsync($"api/categoria/{_categoriaId}");
+        confirma.CloseModal();
+        await CarregaCategorias();
+    }
+
+    void CancelaConfirma()
+    {
+        confirma.CloseModal();        
+    }
+}

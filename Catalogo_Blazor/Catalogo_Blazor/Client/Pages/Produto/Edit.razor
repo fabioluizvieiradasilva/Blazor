@@ -1,0 +1,37 @@
+﻿@page "/produto/edit/{produtoId:int}"
+@inject HttpClient httpClient
+@inject NavigationManager navigation
+
+<h3>Editar Produto</h3>
+
+<ProdutoForm
+    ButtonTextCancel="Cancelar"
+    ButtonTextSubmit="Salvar"
+    Produto="@produto"
+    ImagemRemota="@imagemRemota"
+    OnValidSubmit="@EditarProduto"
+>
+
+</ProdutoForm>
+
+@code {
+    [Parameter]
+    public int produtoId { get; set; }
+
+    private Produto produto = new Produto();    
+    private string? imagemRemota { get; set; }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        produto = await httpClient.GetFromJsonAsync<Produto>($"api/produto/{produtoId}");
+        imagemRemota = produto.ImagemUrl;
+    }
+
+    private async Task EditarProduto()
+    {
+        imagemRemota = null;
+        await httpClient.PutAsJsonAsync("api/produto", produto);
+        navigation.NavigateTo("produto");
+    }
+
+}

@@ -1,0 +1,89 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = Catalogo_Blazor.Client
+build_property.RootNamespace = Catalogo_Blazor.Client
+build_property.ProjectDir = C:\Dev\Blazor\Catalogo_Blazor\Catalogo_Blazor\Client\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Dev\Blazor\Catalogo_Blazor\Catalogo_Blazor\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Catalogo/Detalhe.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ29cRGV0YWxoZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Catalogo/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0YWxvZ29cSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Categoria/CategoriaForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXENhdGVnb3JpYUZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Categoria/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXENyZWF0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Categoria/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXEVkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Categoria/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhXEluZGV4LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Produto/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHV0b1xDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Produto/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHV0b1xFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Produto/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHV0b1xJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Pages/Produto/ProdutoForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHV0b1xQcm9kdXRvRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Shared/Confirma.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbmZpcm1hLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Shared/ImagemFoto.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEltYWdlbUZvdG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Shared/Paginacao.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFBhZ2luYWNhby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-qrhs1y76fy
+
+[C:/Dev/Blazor/Catalogo_Blazor/Catalogo_Blazor/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-vg4hnrsqjt

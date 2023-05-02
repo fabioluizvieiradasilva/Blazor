@@ -1,0 +1,28 @@
+﻿@page "/categoria/edit/{categoriaid:int}"
+@inject HttpClient httpClient
+@inject NavigationManager navigation
+
+<h3>Editar Categoria</h3>
+
+<CategoriaForm ButtonTextCancel="Cancelar"
+               ButtonTextSubmit="Salvar"
+               OnValidSubmit="@EditarCategoria"
+               Categoria="@categoria" />
+
+@code {
+    [Parameter]
+    public int categoriaId { get; set; }
+    Categoria categoria = new Categoria();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        categoria = await httpClient.GetFromJsonAsync<Categoria>($"api/categoria/{categoriaId}");
+    }
+
+    public async Task EditarCategoria()
+    {
+        await httpClient.PutAsJsonAsync("api/categoria", categoria);
+        navigation.NavigateTo("categoria");
+    }
+
+}

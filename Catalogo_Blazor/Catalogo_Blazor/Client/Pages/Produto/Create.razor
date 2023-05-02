@@ -1,0 +1,28 @@
+﻿@page "/produto/create"
+@inject HttpClient httpClient
+@inject NavigationManager navigation
+
+<h3>Novo Produto</h3>
+<br/>
+<ProdutoForm
+    Produto="@produto"    
+    ButtonTextSubmit="Salvar"
+    ButtonTextCancel="Cancelar"
+    OnValidSubmit="@CriarProduto"
+    ImagemRemota="@imagemRemoto">
+
+</ProdutoForm>
+
+@code {
+    Produto produto = new Produto();
+    private string? imagemRemoto { get; set; }
+
+    public async Task CriarProduto()
+    {
+        imagemRemoto = produto.ImagemUrl;
+        await httpClient.PostAsJsonAsync("api/produto", produto);
+        navigation.NavigateTo("produto");
+
+    }
+
+}

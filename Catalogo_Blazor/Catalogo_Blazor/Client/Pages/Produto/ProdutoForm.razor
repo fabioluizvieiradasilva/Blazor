@@ -1,0 +1,105 @@
+﻿<EditForm Model="@Produto" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <div>
+            <InputText @bind-Value="@Produto.Nome" class="form-control"/>
+            <ValidationMessage For="@(()=>Produto.Nome)"/>
+        </div>        
+    </div>
+    <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <div>
+            <InputTextArea @bind-Value="@Produto.Descricao" class="form-control" />
+            <ValidationMessage For="@(()=>Produto.Descricao)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="preco">Preço</label>
+        <div>
+            <InputNumber @bind-Value="@Produto.Preco" class="form-control" />
+            <ValidationMessage For="@(()=>Produto.Preco)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="categoria">Categoria: @Produto.CategoriaId</label>
+        <div>
+            <InputSelect @bind-Value="@Produto.CategoriaId" @onchange="CategoriaSelectionChanged" class="form-control">
+                <option value="0">Escolha uma categoria</option>
+                @if(categorias != null)
+                {
+                    @foreach(var categoria in categorias)
+                    {
+                        <option value="@categoria.CategoriaId">
+                            @categoria.Nome
+                        </option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(()=>Produto.CategoriaId)" />
+        </div>
+    </div>
+    <br/>
+    <div class="form-group row">
+        <InputFile OnChange="CarregaImagem"></InputFile>
+        <label for="imagem">Imagem</label>
+    </div>
+    <div class="col-2">
+        <ImagemFoto ImagemRemota="@Produto.ImagemUrl"/>
+    </div>
+
+    <br/>
+    <button type="submit" class="btn btn-success">@ButtonTextSubmit</button>
+    <button @onclick="@(()=>navigation.NavigateTo("produto"))" class="btn btn-danger">@ButtonTextCancel</button>
+
+</EditForm>
+
+@code {
+    [Inject]
+    NavigationManager navigation { get; set; }
+    [Inject]
+    HttpClient httpClient { get; set; }
+    [Parameter]
+    public Produto Produto { get; set; }
+    [Parameter]
+    public string? ButtonTextSubmit { get; set; }
+    [Parameter]
+    public string? ButtonTextCancel { get; set; }
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+    [Parameter]
+    public string ImagemRemota { get; set; }
+
+    private long maxFileSize = 1024 * 1024 * 15;
+
+    private List<Categoria> categorias { get; set; }
+
+    private async Task CarregaCategorias()
+    {
+        categorias = await httpClient.GetFromJsonAsync<List<Categoria>>("api/categoria/all");
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await CarregaCategorias();
+    }
+    private void CategoriaSelectionChanged()
+    {
+        Console.Write(Produto.CategoriaId);
+    }
+    async Task CarregaImagem(InputFileChangeEventArgs e)
+    {
+        var format = "image/jpeg";
+        var imageFile = await e.File.RequestImageFileAsync(format, 640, 480);
+        using var fileStream = imageFile.OpenReadStream(maxFileSize);
+        using var memoryStream = new MemoryStream();
+        await fileStream.CopyToAsync(memoryStream);
+        ImagemRemota = $"data:{format};base64,{Convert.ToBase64String(memoryStream.ToArray())}";
+        if(ImagemRemota != null)
+        {
+            Produto.ImagemUrl = ImagemRemota;
+            ImagemRemota = null;
+        }
+    }
+}
